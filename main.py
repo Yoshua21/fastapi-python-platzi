@@ -17,6 +17,14 @@ movies = [
         'year': '20222',
         'rating': 9,
         'category': 'Animada'    
+    } ,
+      {
+        'id':3,
+        'title': "shuek",
+        'overview': "PElicula de disney ...",
+        'year': '2017',
+        'rating': 7,
+        'category': 'Animada'    
     } 
 ]
 
@@ -70,3 +78,11 @@ def update_movie(id: int, title:str=Body(), overview: str=Body(), year: int=Body
             item['category']= category    
             return movies
         return "Pelicula no encontrada" 
+    
+@app.delete('/movies/{id}',tags =['movies'])
+def delte_movie(id: int):
+    for item in movies:
+        if item["id"]==id:
+            movies.remove(item)
+            return movies
+        return "No localizado"
