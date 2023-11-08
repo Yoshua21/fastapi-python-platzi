@@ -40,9 +40,13 @@ def get_movie(id:int):
     return []
 
 @app.get('/movies/',tags=['movies'])
-def get_movie_by_category(category:str):
+def get_movie_by_category(category:str,year:int):
     category=category.upper()
     for tipo in movies:
         if tipo['category']==category:
             return tipo
     return []
+
+@app.post('/movies',tags=['movies'])
+def create_movie(id: int, title:str, overview: str, year: int, rating: float, category: str):
+    return title
