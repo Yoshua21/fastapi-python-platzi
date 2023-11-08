@@ -58,3 +58,15 @@ def create_movie(id: int= Body(), title:str=Body(), overview: str=Body(), year: 
         'category': category    
     })
     
+
+@app.put('/movies/}{id}'tags=['movies'])
+def update_movie(id: int, title:str, overview: str, year: int, rating: float, category: str):
+    for item in movies:
+        if item['id']==id:
+            item['title']: title
+            item['overview']: overview
+            item['year']: year
+            item['rating']: rating
+            item['category']: category    
+            return movies
+        return "Pelicula no encontrada" 
