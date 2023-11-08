@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, Path, Query
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel,Field
 from typing import Optional
@@ -63,15 +63,14 @@ def get_movies():
     return movies
 
 @app.get('/movies/{id}',tags=['movies']) #Se creo un api donde se espera a que se envie un parametro en la ruta para poder repsonder de acuerdo al parametro
-def get_movie(id:int):
+def get_movie(id:int=Path(ge=1,le=2000)):
     for item in movies:
         if item['id']==id:
             return item
     return []
 
 @app.get('/movies/',tags=['movies'])
-def get_movie_by_category(category:str,year:int):
-    category=category.upper()
+def get_movie_by_category(category:str=Query(min_length=5,max_length=15)):
     for tipo in movies:
         if tipo['category']==category:
             return tipo
